@@ -4,6 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { ConfigService } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
+import { RolesModule } from './roles/roles.module';
+import { PermissionsModule } from './permissions/permissions.module';
+import { AuthModule } from './auth/auth.module';
+
 @Module({
   imports: [TasksModule,
     /* TypeOrmModule.forRoot({
@@ -33,7 +37,7 @@ import { UsersModule } from './users/users.module';
       synchronize: true,
 
     }),
-}), UsersModule
+}), UsersModule, RolesModule, PermissionsModule, AuthModule
   ],
   controllers: [],
   providers: [],

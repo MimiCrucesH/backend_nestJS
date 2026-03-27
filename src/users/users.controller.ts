@@ -25,6 +25,8 @@ export class UsersController {
   }
   @Delete(':id')
   remove(@Param('id') id: string){
+    //return this.usersService.remove(Number(id));
     return this.usersService.remove(Number(id));
+    // await userRepository.softDelete(id);
   }
 }
