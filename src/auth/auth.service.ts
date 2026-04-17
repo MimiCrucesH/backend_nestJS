@@ -27,12 +27,12 @@ export class AuthService {
 
         return {
             access_token: this.jwtService.sign(payload),
+            name: user.name,
+            first_name: user.last_name
         };
-
 
         
     }
-
-    
-
 }
+
+

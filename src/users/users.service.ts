@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity'
 import * as bcrypt from 'bcrypt';
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -11,8 +12,6 @@ export class UsersService {
   ) { }
 
   /* create (data: Partial<User>){
-
-
     const user = this.userRepository.create(data);
     return this.userRepository.save(user);
   }
@@ -23,23 +22,31 @@ export class UsersService {
     if (data.password) {
       data.password = await bcrypt.hash(data.password, 10);
     }
-
+    
     const user = this.userRepository.create(data);
     return this.userRepository.save(user);
+
   }
 
   findAll() {
-    return this.userRepository.find();
+    return this.userRepository.find(
+      {
+        relations: ['role'],
+        withDeleted: true 
+      }
+    );
   }
   findOne(id: number) {
     return this.userRepository.findOne({
-      where: { id }
+      where: { id },
+      relations: ['role']
     });
   }
   async update(id: number, data: Partial<User>) {
     await this.userRepository.update(id, data);
     return this.findOne(id);
   }
+  
   remove(id: number) {
     // este elimina completamente al usuario:
     // return this.userRepository.delete(id);

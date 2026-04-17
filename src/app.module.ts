@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { PermissionsModule } from './permissions/permissions.module';
 import { AuthModule } from './auth/auth.module';
+import { MunicipalitiesModule } from './municipalities/municipalities.module';
 
 @Module({
   imports: [TasksModule,
@@ -37,7 +38,7 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
 
     }),
-}), UsersModule, RolesModule, PermissionsModule, AuthModule
+}), UsersModule, RolesModule, PermissionsModule, AuthModule, MunicipalitiesModule
   ],
   controllers: [],
   providers: [],
