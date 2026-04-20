@@ -10,8 +10,8 @@ export class SettlementsService {
 
   constructor(
     @InjectRepository(Settlement)
-    private settlementRepository : Repository<Settlement>
-  ){}
+    private settlementRepository: Repository<Settlement>
+  ) { }
 
   create(createSettlementDto: CreateSettlementDto) {
     return 'This action adds a new settlement';
@@ -23,18 +23,21 @@ export class SettlementsService {
 
   findOne(id: number) {
     return this.settlementRepository.findOne({
-      where:{id}
+      where: { id }
     })
   }
 
-  findByMunicipality(id: number){
+  findByMunicipality(id: number) {
     return this.settlementRepository.find({
-      where:{
+      where: {
         municipality_id: id
+      },
+      order: {
+        settlement: 'ASC'
       }
     })
   }
- 
+
 
   update(id: number, updateSettlementDto: UpdateSettlementDto) {
     return `This action updates a #${id} settlement`;
