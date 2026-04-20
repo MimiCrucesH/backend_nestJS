@@ -9,6 +9,7 @@ import { PermissionsModule } from './permissions/permissions.module';
 import { AuthModule } from './auth/auth.module';
 import { MunicipalitiesModule } from './municipalities/municipalities.module';
 import { SettlementsModule } from './settlements/settlements.module';
+import { WeatherModule } from './weather/weather.module';
 
 @Module({
   imports: [TasksModule,
@@ -39,7 +40,7 @@ import { SettlementsModule } from './settlements/settlements.module';
       synchronize: true,
 
     }),
-}), UsersModule, RolesModule, PermissionsModule, AuthModule, MunicipalitiesModule, SettlementsModule
+}), UsersModule, RolesModule, PermissionsModule, AuthModule, MunicipalitiesModule, SettlementsModule, WeatherModule
   ],
   controllers: [],
 })
