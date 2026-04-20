@@ -8,6 +8,7 @@ import { RolesModule } from './roles/roles.module';
 import { PermissionsModule } from './permissions/permissions.module';
 import { AuthModule } from './auth/auth.module';
 import { MunicipalitiesModule } from './municipalities/municipalities.module';
+import { SettlementsModule } from './settlements/settlements.module';
 
 @Module({
   imports: [TasksModule,
@@ -38,10 +39,9 @@ import { MunicipalitiesModule } from './municipalities/municipalities.module';
       synchronize: true,
 
     }),
-}), UsersModule, RolesModule, PermissionsModule, AuthModule, MunicipalitiesModule
+}), UsersModule, RolesModule, PermissionsModule, AuthModule, MunicipalitiesModule, SettlementsModule
   ],
   controllers: [],
-  providers: [],
 })
 export class AppModule {
 
