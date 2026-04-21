@@ -11,6 +11,6 @@ import { HttpModule, HttpService } from '@nestjs/axios';
 export class WeatherModule {
   constructor(private readonly httpService: HttpService) {}
 
-  f
+  
 
 }
