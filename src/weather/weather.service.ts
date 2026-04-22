@@ -20,7 +20,7 @@ export class WeatherService {
 
       daily: "weather_code",
 
-      current: "temperature_2m",
+      current: "temperature_2m,weather_code",
 
       hourly: "temperature_2m,precipitation_probability,precipitation,rain,showers,weather_code,relative_humidity_2m",
 
@@ -56,6 +56,7 @@ export class WeatherService {
 
       current: {
         temperature: Number(current?.variables(0)?.value()?.toFixed(1)),
+        code : current?.variables(1)?.value()
       },
       hourly: {
         time: horas,
