@@ -55,20 +55,10 @@ export class WeatherService {
       //elevation: response.elevation(),
 
       current: {
-        temperature: current?.variables(0)?.value(),
+        temperature: Number(current?.variables(0)?.value()?.toFixed(1)),
       },
       hourly: {
-        //time: hourly?.time(),
-        //time: hourly?.time()?.toString(),
         time: horas,
-        //time: new Date(Number(hourly?.time()) * 1000).toISOString(),
-        /* temperature: hourly?.variables(0)?.valuesArray(),
-        precipitation_probability: hourly?.variables(1)?.valuesArray(),
-        precipitation: hourly?.variables(2)?.valuesArray(),
-        rain: hourly?.variables(3)?.valuesArray(),
-        showers: hourly?.variables(4)?.valuesArray(),
-        weather_code: hourly?.variables(5)?.valuesArray(),
-        relative_humidity_2m: hourly?.variables(6)?.valuesArray(), */
         temperature: Array.from(hourly?.variables(0)?.valuesArray() || []),
         precipitation_probability: Array.from(hourly?.variables(1)?.valuesArray() || []),
         precipitation: Array.from(hourly?.variables(2)?.valuesArray() || []),
