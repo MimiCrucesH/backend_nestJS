@@ -18,7 +18,7 @@ export class WeatherService {
       latitude: lat,
       longitude: lon,
 
-      daily: "weather_code",
+      daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max",
 
       current: "temperature_2m,weather_code",
 
@@ -40,6 +40,10 @@ export class WeatherService {
     const hourly = response.hourly();
 
     const daily = response.daily();
+
+    //temperaturas maximas
+    const maxTemp : number = 0;
+    const minTemp : number = 0;
 
     const horas = [
       '0h', '1h', '2h', '3h', '4h', '5h',
@@ -68,9 +72,13 @@ export class WeatherService {
         weather_code: Array.from(hourly?.variables(5)?.valuesArray() || []),
         relative_humidity_2m: Array.from(hourly?.variables(6)?.valuesArray() || []),
       },
+      
       daily: {
         // time: daily?.time(),
         weather_code: daily?.variables(0)?.valuesArray(),
+        maxTemp : daily?.variables(1)?.valuesArray(),
+        minTemp : daily?.variables(2)?.valuesArray(),
+        maxPrecip : daily?.variables(3)?.valuesArray(),
       },
     };
   }
