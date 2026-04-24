@@ -25,7 +25,7 @@ export class WeatherService {
       hourly: "temperature_2m,precipitation_probability,precipitation,rain,showers,weather_code,relative_humidity_2m",
 
       start_date: hoy,
-      end_date:hoy,
+      end_date: hoy,
       timezone: "auto"
     };
 
@@ -42,8 +42,8 @@ export class WeatherService {
     const daily = response.daily();
 
     //temperaturas maximas
-    const maxTemp : number = 0;
-    const minTemp : number = 0;
+    const maxTemp: number = 0;
+    const minTemp: number = 0;
 
     const horas = [
       '0h', '1h', '2h', '3h', '4h', '5h',
@@ -60,7 +60,7 @@ export class WeatherService {
 
       current: {
         temperature: Number(current?.variables(0)?.value()?.toFixed(1)),
-        code : current?.variables(1)?.value()
+        code: current?.variables(1)?.value()
       },
       hourly: {
         time: horas,
@@ -72,13 +72,17 @@ export class WeatherService {
         weather_code: Array.from(hourly?.variables(5)?.valuesArray() || []),
         relative_humidity_2m: Array.from(hourly?.variables(6)?.valuesArray() || []),
       },
-      
+
       daily: {
         // time: daily?.time(),
         weather_code: daily?.variables(0)?.valuesArray(),
-        maxTemp : daily?.variables(1)?.valuesArray(),
-        minTemp : daily?.variables(2)?.valuesArray(),
-        maxPrecip : daily?.variables(3)?.valuesArray(),
+        maxTemp: Number(
+          Array.from(daily?.variables(1)?.valuesArray() || [])[0]?.toFixed(1)
+        ),
+        minTemp: Number(
+          Array.from(daily?.variables(2)?.valuesArray() || [])[0]?.toFixed(1)
+        ),
+        maxPrecip: Array.from(daily?.variables(3)?.valuesArray() || [])[0],
       },
     };
   }
