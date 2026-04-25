@@ -51,7 +51,36 @@ export class WeatherService {
       '12h', '13h', '14h', '15h', '16h', '17h',
       '18h', '19h', '20h', '21h', '22h', '23h'
     ];
+    const temperaturas = Array.from(hourly?.variables(0)?.valuesArray() || []);
 
+    let maxTempHora = -Infinity;
+    let horaMaxTemp = '';
+    const probPrecipitacion = Array.from(hourly?.variables(1)?.valuesArray() || []);
+    let minTempHora = Infinity;
+    let horaMinTemp = '';
+
+    let maxPrecip = -Infinity;
+    let horaMaxPrecip = '';
+
+    temperaturas.forEach((temp, index) => {
+      // máxima temperatura
+      if (temp > maxTempHora) {
+        maxTempHora = temp;
+        horaMaxTemp = horas[index];
+      }
+
+      // mínima temperatura
+      if (temp < minTempHora) {
+        minTempHora = temp;
+        horaMinTemp = horas[index];
+      }
+
+      // máxima probabilidad de precipitación
+      if (probPrecipitacion[index] > maxPrecip) {
+        maxPrecip = probPrecipitacion[index];
+        horaMaxPrecip = horas[index];
+      }
+    });
     return {
       date: hoy,
       //latitude: response.latitude(),
@@ -64,25 +93,28 @@ export class WeatherService {
       },
       hourly: {
         time: horas,
-        temperature: Array.from(hourly?.variables(0)?.valuesArray() || []),
+        temperature: temperaturas,
         precipitation_probability: Array.from(hourly?.variables(1)?.valuesArray() || []),
         precipitation: Array.from(hourly?.variables(2)?.valuesArray() || []),
         rain: Array.from(hourly?.variables(3)?.valuesArray() || []),
         showers: Array.from(hourly?.variables(4)?.valuesArray() || []),
         weather_code: Array.from(hourly?.variables(5)?.valuesArray() || []),
         relative_humidity_2m: Array.from(hourly?.variables(6)?.valuesArray() || []),
+
       },
 
       daily: {
         // time: daily?.time(),
         weather_code: daily?.variables(0)?.valuesArray(),
-        maxTemp: Number(
-          Array.from(daily?.variables(1)?.valuesArray() || [])[0]?.toFixed(1)
-        ),
-        minTemp: Number(
-          Array.from(daily?.variables(2)?.valuesArray() || [])[0]?.toFixed(1)
-        ),
-        maxPrecip: Array.from(daily?.variables(3)?.valuesArray() || [])[0],
+        maxTemp: Number(maxTempHora.toFixed(1)),
+        hourOfMaxTemperature: horaMaxTemp,
+
+        minTemp: Number(minTempHora.toFixed(1)),
+        hourOfMinTemperature: horaMinTemp,
+
+        maxPrecip: maxPrecip,
+        hourOfMaxPrecipitation: horaMaxPrecip
+
       },
     };
   }
