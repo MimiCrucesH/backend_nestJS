@@ -16,7 +16,7 @@ export class Roles{
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ default: true })
     active : boolean;
 
     @Column({unique:true})
