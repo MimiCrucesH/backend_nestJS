@@ -17,7 +17,7 @@ export class Permissions{
   @Column()
   active : boolean;
 
-  @Column()
+  @Column({unique:true})
   permission : string;
 
   @Column()
